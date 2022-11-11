@@ -6,7 +6,7 @@
 /*   By: vsimeono <vsimeono@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:25:23 by vsimeono          #+#    #+#             */
-/*   Updated: 2022/11/10 17:27:17 by vsimeono         ###   ########.fr       */
+/*   Updated: 2022/11/11 13:41:41 by vsimeono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,9 @@
 		*this = src;
 	}
 
-	ClapTrap::ClapTrap(std::string name): _name(name), _hit_points(MAX_HP), _energy_points(MAX_EP), _attack_damage(MAX_AD)
+	ClapTrap::ClapTrap(std::string name): _name(name), _hit_points(10), _energy_points(10), _attack_damage(0)
 	{
-		std::cout << " is Ready for Battle" << std::endl;
-		this->_hit_points = 10;
-		this->_energy_points = 10;
-		this->_attack_damage = 0;
+		std::cout << _name << " is Ready for Battle" << std::endl;
 	}
 	
 	ClapTrap &ClapTrap::operator=(ClapTrap const &src)
@@ -46,7 +43,7 @@
 		return (*this);
 	}
 	
-	~ClapTrap()
+	ClapTrap::~ClapTrap()
 	{
 		std::cout << "Destructor Called" << std::endl;
 	}
@@ -56,12 +53,16 @@
 		std::cout << "Attack Function Called" << std::endl;
 		if(this->_hit_points <= 0)
 		{
-			std::cout << "Player is already Dead" << std::endl;
+			std::cout << "Your Opponent is already Dead" << std::endl;
 		}
-		if(this->_energy_points > 0)
+		if (this->_energy_points <= 0)
+		{
+			std::cout << this->getName() << "Does not have enough Energy" << std::endl;
+		}
+		else
 		{
 			std::cout << this->getName() << " Attacks " << target
-			<< "Causing a damage of " << this->_attack_damage << std::endl;
+			<< " Causing a damage of " << this->_attack_damage << std::endl;
 			this->_energy_points--;
 		}
 	}
@@ -74,38 +75,53 @@
 			std::cout << "Player is dead" << std::endl;
 			return ;
 		}
-		std::cout << "Player takes a damage of " << amount << std::endl;
+		std::cout << _name << " takes damage of " << amount << std::endl;
 	}
 
 	void	ClapTrap::beRepaired(unsigned int amount)
 	{
-		if (this->_energy_points > 0 && this->_health_points && this->_healt_points < 10)
+		std::cout << "Repair Function Called" << std::endl;
+		if (this->_energy_points > 0 && this->_hit_points > 0 && this->_hit_points < 10)
 		{
 			this->_energy_points--;
 			this->_hit_points += amount;
-			if (this->_health_points > 10)
+			if (this->_hit_points >= 10)
 			{
-				this->_health_points = 10;
-				std::cout << "Player is already at Maximum Health" << std::endl;
+				this->_hit_points = 10;
+				std::cout << _name << " is now at Maximum Health" << std::endl;
 			}
-			if ()
+			std::cout << _name << "'s hit points are " << _hit_points << std::endl;
 		}
-		
-		
-		if (this->_energy_points <= 0)
+		else if (this->_hit_points == 10)
 		{
-			std::cout << "Player needs more Energy to Heal" << std::endl;
+			std::cout << _name << " is already at Maximum Health" << std::endl;
 		}
-		
-		std::cout << "Repair Function Called" << std::endl;
-		this->energy_points = energy_points - 1;
-		this->hit_points = amount;
+		else if (this->_hit_points <= 0)
+		{
+		std::cout << _name << " is already Dead" << std::endl;
+		}
+		else if (this->_energy_points <= 0)
+		{
+			std::cout << _name << " needs more Energy to Heal" << std::endl;
+		}
 	}
-	
 
+std::string	ClapTrap::getName() const
+{
+	return (this->_name);
+}
 
+int		ClapTrap::getHitPoints() const
+{
+	return (this->_energy_points);
+}
 
-	
+int		ClapTrap::getEnergyPoints() const
+{
+	return (this->_energy_points);
+}
 
-		
-	
+int		ClapTrap::getAttackDamage() const
+{
+	return (this->_attack_damage);
+}

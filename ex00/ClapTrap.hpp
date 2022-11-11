@@ -6,16 +6,12 @@
 /*   By: vsimeono <vsimeono@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:17:57 by vsimeono          #+#    #+#             */
-/*   Updated: 2022/11/10 17:01:10 by vsimeono         ###   ########.fr       */
+/*   Updated: 2022/11/11 13:41:37 by vsimeono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLAPTRAP_HPP
 #define CLAPTRAP_HPP
-
-#define MAX_HP 10
-#define MAX_EP 10
-#define MAX_AD 0
 
 #include <iostream>
 
@@ -34,7 +30,6 @@ class ClapTrap
 		ClapTrap &operator=(ClapTrap const &src);
 		~ClapTrap();
 
-	
 		void	attack(const std::string &target);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
