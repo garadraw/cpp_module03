@@ -4,7 +4,7 @@ CC = c++
 
 FLAGS = -Werror -Wall -Wextra -std=c++98 -g
 
-SRC = main.cpp ClapTrap.cpp ScavTrap.cpp
+SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 
 RM = rm -f
 

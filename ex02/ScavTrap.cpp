@@ -6,14 +6,14 @@
 /*   By: vsimeono <vsimeono@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:17:17 by vsimeono          #+#    #+#             */
-/*   Updated: 2022/11/11 22:08:26 by vsimeono         ###   ########.fr       */
+/*   Updated: 2022/11/12 15:40:42 by vsimeono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
 /* Canonical */
-ScavTrap::ScavTrap(): ClapTrap("Kostas"){
+ScavTrap::ScavTrap(): ClapTrap("TriluliluScav"){
 	std::cout << "ScavTrap Void Constructor called" << std::endl;
 	this->_hit_points = this->init_hit_points;
 	this->_energy_points = this->init_energy_points;
@@ -25,6 +25,7 @@ ScavTrap::ScavTrap(): ClapTrap("Kostas"){
 
 ScavTrap::ScavTrap(std::string name): ClapTrap(name)
 {
+	this->_name = name;
 	this->_hit_points = this->init_hit_points;
 	this->_energy_points = this->init_energy_points;
 	this->_attack_damage = this->init_attack_damage;
@@ -45,7 +46,8 @@ ScavTrap::ScavTrap(ScavTrap const &src): ClapTrap(src._name)
 	std::cout << "HP " << this->_hit_points << " EP " << this->_energy_points << std::endl;
 }
 
-ScavTrap& ScavTrap::operator=(const ScavTrap &src){
+ScavTrap& ScavTrap::operator=(const ScavTrap &src)
+{
 	this->_name = src._name;
 	this->_attack_damage = src._attack_damage;
 	this->_hit_points = src._hit_points;
@@ -71,8 +73,8 @@ void	ScavTrap::guardGate()
 void	ScavTrap::attack(const std::string &target)
 {
 	if (this->_energy_points > 0 && this->_hit_points > 0){
-		std::cout << "ScavTrap \'" << this->_name;
-		std::cout << "\' attacks " << target;
+		std::cout << "ScavTrap " << this->_name;
+		std::cout << " attacks " << target;
 		std::cout << " causing " << this->_attack_damage << " points of damage" << std::endl;
 			this->_energy_points -= 1;
 		std::cout << "HP " << this->_hit_points << " EP " << this->_energy_points << std::endl;

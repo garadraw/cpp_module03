@@ -6,54 +6,69 @@
 /*   By: vsimeono <vsimeono@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:37:32 by vsimeono          #+#    #+#             */
-/*   Updated: 2022/11/11 20:48:36 by vsimeono         ###   ########.fr       */
+/*   Updated: 2022/11/12 15:06:32 by vsimeono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 #include "ClapTrap.hpp"
+#include "FragTrap.hpp"
 
 int		main(void) {
 
-	std::cout << std::endl << "============================================================" << std::endl;
-	std::cout <<  " Basic Tests " << std::endl;
-	ClapTrap	clapTrap("Tim");
-	ScavTrap	scavTrap;
+	{
+		std::cout << "*** Basic Tests and Gate Guard ***" << std::endl;
+		ClapTrap	clapTrap("Clap");
+		FragTrap	fragTrap;
 
-	scavTrap.attack("Kostas");
-	clapTrap.attack("Vlad");
-	scavTrap.guardGate();
-	scavTrap.takeDamage(30);
-	scavTrap.beRepaired(10);
-	scavTrap.takeDamage(50);
-	scavTrap.takeDamage(40);
-	scavTrap.takeDamage(10);
-	scavTrap.beRepaired(1);
-	scavTrap.attack("Cat");
-	clapTrap.beRepaired(5);
+		fragTrap.attack("Tim");
+		clapTrap.attack("Kostas");
+		fragTrap.highFivesGuys();
+		fragTrap.takeDamage(30);
+		fragTrap.beRepaired(10);
+		fragTrap.takeDamage(50);
+		fragTrap.takeDamage(40);
+		fragTrap.takeDamage(10);
+		fragTrap.beRepaired(1);
+		fragTrap.attack("Kostas");
+		clapTrap.beRepaired(5);
+	}
+	{
+		std::cout << std::endl << "*** Copying ***" << std::endl;
+		FragTrap	fragTrap;
 
+		fragTrap.takeDamage(30);
+		FragTrap	frag2 ("FragTrapCopy");
+		frag2 = fragTrap;
+		frag2.attack("Kostas");
+		fragTrap.takeDamage(30);
+		FragTrap	frag3(fragTrap);
+	}
+	{
 
-	// std::cout << std::endl << "============================================================" << std::endl;
-	// std::cout << std::endl << " Copying " << std::endl;
-	// ScavTrap	scavTrap;
+		std::cout << std::endl << "*** Repair and attack limits ***" << std::endl;
+		FragTrap	fragTrap;
 
-	// scavTrap.takeDamage(30);
-	// ScavTrap	cat2("Cat");
-	// cat2 = scavTrap;
-	// cat2.attack("Dog");
-	// ScavTrap	dog(scavTrap);
+		for (int i = 0; i < 50; i++)
+			fragTrap.attack("Tim");
+		fragTrap.beRepaired(10);
+		fragTrap.attack("Tim");
+		fragTrap.takeDamage(100);
+		fragTrap.takeDamage(100);
+	}
+	{
+		std::cout << std::endl << "*** FragTrap ***" << std::endl;
+		FragTrap	fragTrap;
+		ScavTrap	scavTrap;
 
-
-	// std::cout << std::endl << "============================================================" << std::endl;
-	// std::cout << std::endl << "*** Repair and attack limits ***" << std::endl;
-	// ScavTrap	ScavTrap;
-
-	// for (int i = 0; i < 50; i++)
-	// {
-	// 	scavTrap.attack("clouds");
-	// 	scavTrap.beRepaired(10);
-	// 	scavTrap.attack("clouds");
-	// 	scavTrap.takeDamage(100);
-	// 	scavTrap.takeDamage(100);
-	// }
+		scavTrap.attack("Tim");
+		scavTrap.guardGate();
+		fragTrap.attack("Tim");
+		fragTrap.highFivesGuys();
+		fragTrap.takeDamage(50);
+		fragTrap.beRepaired(30);
+		fragTrap.takeDamage(80);
+	}
+	return (0);
 }
+

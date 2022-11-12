@@ -6,7 +6,7 @@
 /*   By: vsimeono <vsimeono@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 15:25:23 by vsimeono          #+#    #+#             */
-/*   Updated: 2022/11/11 22:10:01 by vsimeono         ###   ########.fr       */
+/*   Updated: 2022/11/12 15:56:52 by vsimeono         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ ClapTrap::ClapTrap() : _name("Tim"), _hit_points(init_hit_points), _energy_point
 	std::cout << "ClapTrap Void Constructor Called" << std::endl;
 }
 
-ClapTrap::ClapTrap(ClapTrap const &src)
+ClapTrap::ClapTrap(ClapTrap const &src): _name(src._name + "Copy"), _hit_points(src._hit_points), _energy_points(src._energy_points), _attack_damage(src._attack_damage), _max_hit_points(src._max_hit_points)
 {
 	std::cout << "ClapTrap Copy Class Constructor Called" << std::endl;
 	*this = src;
@@ -41,7 +41,7 @@ ClapTrap &ClapTrap::operator=(ClapTrap const &src)
 	std::cout << "HP " << this->_hit_points << " EP " << this->_energy_points << std::endl;
 	return *this;
 }
-	
+
 ClapTrap::~ClapTrap()
 {
 	std::cout << "ClapTrap Destructor Called" << std::endl;
@@ -54,8 +54,8 @@ void	ClapTrap::attack(const std::string &target)
 {
 	std::cout << "Attack Function Called" << std::endl;
 	if (this->_energy_points > 0 && this->_hit_points > 0){
-		std::cout << "ClapTrap \'" << this->_name;
-		std::cout << "\' attacks " << target;
+		std::cout << "ClapTrap " << this->_name;
+		std::cout << " attacks " << target;
 		std::cout << " causing " << this->_attack_damage << " points of damage" << std::endl;
 		this->_energy_points -= 1;
 		std::cout << "HP " << this->_hit_points << " EP " << this->_energy_points << std::endl;
